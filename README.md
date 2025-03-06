@@ -7,6 +7,8 @@ Node.js package. Analog of Node.js Buffer.
 * Has more data types
 * Has arbitrary length data types that can significantly reduce the size of the data
 
+# Install
+`npm i hkey-bin-coder`
 
 ## Safe and Fast
 Two versions:
@@ -14,7 +16,7 @@ Two versions:
 * FastCoder -- without arguments checks
 
 ```js
-	const {SafeCoder, FastCoder} = require('bin-coder');
+	const {SafeCoder, FastCoder} = require('hkey-bin-coder');
 ```
 ## constructor
 There are several options for the constructor:
