@@ -64,7 +64,7 @@ Use readNext${Type} and writeNext${Type}. Not read${Type} and write${Type}
 * Float(LE/BE)
 * Double(LE/BE)
 
-###Ints with non-standarts length
+### Ints with non-standarts length
 Supports ints with length = 3,5,6 bytes;
 
 * UInt24(LE/BE)
@@ -89,7 +89,7 @@ It also supports encoding several unsigned integers in 1 byte.
 
 ```js
 	coder.writeNextUInt4(1);
-	coder.writeNextUInt4(1);
+	coder.writeNextUInt4(2);
 ```
 
 ### UIntX(LE/BE)
