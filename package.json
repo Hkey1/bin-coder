@@ -1,0 +1,29 @@
+{
+    "name": "bin-coder",
+    "version": "0.0.1",
+    "main": "./src/index.js",
+    "scripts": {
+        "test": "node ./src/tests/index.js"
+    },
+    "author": "Andrey Belousoff <a.v.belousoff@gmail.com>",
+    "license": "MIT",
+    "description": "Analog Node.js Buffer with pos. To encode and decode binary data",
+    "keywords": [
+        "buffer", "events", "reject"
+    ],
+    "dependencies": {
+    },
+    "engines": {
+        "node": ">=0.1.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Hkey1/bin-coder"
+    },
+    "readme":"Encode/decode binary data",
+    "readmeFilename": "README.md",
+    "bugs": {
+        "url": "https://github.com/Hkey1/bin-coder/issues"
+    },
+    "homepage": "https://github.com/Hkey1/bin-coder"
+}
