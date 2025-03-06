@@ -1,7 +1,14 @@
 # bin-coder
-Node.js package. Analog for Node.js Buffer.
+Node.js package. Analog of Node.js Buffer.
 
-# Safe and Fast
+## Differences from Node.js Buffer
+* Speed is slightly higher
+* More simply to use due to Auto-calculation of read and write position
+* Has more data types
+* Has arbitrary length data types that can significantly reduce the size of the data
+
+
+## Safe and Fast
 Two versions:
 * SafeCoder -- with arguments checks
 * FastCoder -- without arguments checks
@@ -48,9 +55,9 @@ The object has a property pos -- the current position for reading and writing. I
 ## Data Types
 It suport many data types
 
-### from Node.js Buffer
+### As in Node.js Buffer
 Supports all data types that Node.js Buffer. 
-Speed is slightly higher than in Buffer.
+Speed is slightly higher than in Buffer. We are using DataView.
 Use readNext${Type} and writeNext${Type}. Not read${Type} and write${Type} 
 
 * UInt8
