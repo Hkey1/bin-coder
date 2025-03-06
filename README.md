@@ -30,7 +30,7 @@ There are several options for the constructor:
 	const coder  = new SafeCoder(buffer)
 ```
 
-### js ArrayBuffer
+### JS ArrayBuffer
 ```js
 	const buffer = Buffer.alloc(100);
 	const coder  = new SafeCoder(buffer.buffer)
@@ -83,7 +83,7 @@ Supports ints with length = 3,5,6 bytes;
 * Int40(LE/BE)
 * Int48(LE/BE)
 
-### micro UInts
+### Micro UInts
 It also supports encoding several unsigned integers in 1 byte.
 
 * UInt1
