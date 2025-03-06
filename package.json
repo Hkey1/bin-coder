@@ -9,7 +9,10 @@
     "license": "MIT",
     "description": "Analog Node.js Buffer with pos. To encode and decode binary data",
     "keywords": [
-        "buffer","binary","encode","decode"
+        "buffer",
+        "binary",
+        "encode",
+        "decode"
     ],
     "dependencies": {},
     "engines": {
