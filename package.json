@@ -1,5 +1,5 @@
 {
-    "name": "bin-coder",
+    "name": "hkey-bin-coder",
     "version": "0.0.2",
     "main": "./src/index.js",
     "scripts": {
