@@ -101,17 +101,18 @@ It also supports encoding several unsigned integers in 1 byte.
 
 ### UIntX(LE/BE)
 An unsigned integer with auto length. 
-This allows you to write almost any unsigned integers into a minimum number of bytes.
+This allows you to write any unsigned integers up to 64 bits into a minimum number of bytes.
 
-| from              | to                    | bytes |
-|-------------------|-----------------------|-------|  
-| 0 				| 239          			| 1     |
-| 240 				| 2543       			| 2     |
-| 2544 				| 68079                 | 3     |
-| 68,080 			| 16,845,295            | 4     |
-| 16,845,296 		| 4,311,812,591       	| 5     |
-| 4,311,812,592 	| 1,103,823,440,367     | 6     |
-| 1,103,823,440,368 | 281,474,976,710,656 	| 7     |
+| from                | to                    		| bytes |
+|---------------------|-----------------------------|-------|  
+| 0 				  | 239          				| 1     |
+| 240 				  | 2543       					| 2     |
+| 2544 				  | 68079               		| 3     |
+| 68,080 			  | 16,845,295            		| 4     |
+| 16,845,296 		  | 4,311,812,591       		| 5     |
+| 4,311,812,592 	  | 1,103,823,440,367     		| 6     |
+| 1,103,823,440,368   | 281,474,976,710,655 		| 7     |
+| 281,474,976,710,656 | 18,446,744,073,709,551,999	| 9     |
   
 ### UFloatH
 It allows to reduce the number of bytes for recording unsigned double in several times.
