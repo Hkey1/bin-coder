@@ -77,11 +77,9 @@ Use readNext${Type} and writeNext${Type}. Not read${Type} and write${Type}
 Supports ints with length = 3,5,6 bytes;
 
 * UInt24(LE/BE)
-* UInt32(LE/BE)
 * UInt40(LE/BE)
 * UInt48(LE/BE)
 * Int24(LE/BE)
-* Int32(LE/BE)
 * Int40(LE/BE)
 * Int48(LE/BE)
 
