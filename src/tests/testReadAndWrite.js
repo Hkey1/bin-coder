@@ -1,3 +1,4 @@
+const assert          = require('node:assert');
 const randomIntFromTo = require('./randomIntFromTo.js');
 
 function checkPos(coder, where, pos0, minBytes, maxBytes, bitPos){
@@ -12,6 +13,7 @@ module.exports = function testReadAndWrite({trials, coder, type, random, minByte
 	bitPos   ??= 0
 	
 	function write(val, pos0){
+		coder.pos    = pos0;
 		if(coder.buf['write'+type] && Math.random()>0.8){
 			if(arg1===undefined || arg1ReadOnly){
 				coder.buf['write'+type](val, pos0);
@@ -20,7 +22,6 @@ module.exports = function testReadAndWrite({trials, coder, type, random, minByte
 			}
 		} else {
 			coder.bitPos = 0;
-			coder.pos    = pos0;
 			if(arg1===undefined || arg1ReadOnly){
 				coder['writeNext'+type](val);
 			} else {				
@@ -30,6 +31,7 @@ module.exports = function testReadAndWrite({trials, coder, type, random, minByte
 		}
 	}
 	function read(pos0){
+		coder.pos    = pos0;
 		if(coder.buf['read'+type] && Math.random()>0.8){
 			return (arg1===undefined
 				? coder.buf['read'+type](pos0)
@@ -37,7 +39,6 @@ module.exports = function testReadAndWrite({trials, coder, type, random, minByte
 			);
 		} else {
 			coder.bitPos = 0;
-			coder.pos    = pos0;
 			const res    = (arg1===undefined 
 				? coder['readNext'+type]() 
 				: coder['readNext'+type](arg1)
@@ -51,14 +52,18 @@ module.exports = function testReadAndWrite({trials, coder, type, random, minByte
 	for(let i=0; i<trials; i++){
 		const val  = random();
 		const pos0 = randomIntFromTo(0, coder.length - (maxBytes||1));
-
+		
 		write(val, pos0);
-		const res   = read(pos0);
+		const writeEnd = coder.pos;
+		const res  = read(pos0);
+		
 		if(res!==val
 		&& (!isNaN(res) || !isNaN(val))
 		&& (!(res instanceof Buffer) || !(val instanceof Buffer) || Buffer.compare(val, res)!==0)){
 			throw new Error(`${type} : res!==val : ${res}!==${val}`)	
 		}
+		const checkPos = (!coder.buf['write'+type] && !coder.buf['read'+type]) || (coder.pos>pos0 && writeEnd>pos0);		
+		if(checkPos && coder.pos!==writeEnd) throw new Error(`${type} read: readEnd!==writeEnd : ${coder.pos}!==${writeEnd} : pos0=${pos0}`);
 	}
 	console.log(type+ (arg1?' '+arg1:''), 'test passed;')
 }

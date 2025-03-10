@@ -52,7 +52,6 @@ module.exports = function basic(safe=false){
 					this.writeNextUInt4(10);//.
 					this.writeNextUInt4(10);//.
 					this.writeNextUInt4(10);//.
-					this.pos++;
 					return;
 				}		
 					
