@@ -133,7 +133,7 @@ To encode repeating values, you can use dictionaries with 128 and 255 values.
 * To encode a repeate of value, dictionaries require only 1 byte.
 * To encode a new value, DicCoder128/DicCoder255 require an additional 1/2 bytes
 
-```
+```js
 	const {SafeCoder, DicCoder127, DicCoder255} = require('hkey-bin-coder');
 
 	const coder      = new SafeCoder(1000);
@@ -167,10 +167,10 @@ To encode repeating values, you can use dictionaries with 128 and 255 values.
 	...
 ```
 
-## initValues
+### initValues
 You can set the initial values of the dictionary
 
-```
+```js
     ...
 	const encoderDic = new DicCoder255(coder, 'DoubleLE', true, [1.234]);
 	
@@ -181,11 +181,11 @@ You can set the initial values of the dictionary
 								 // 13 bytes
 	...
 ```
-## save/load
+### save/load
 You can save/load full state of of the dictionary.
 Its reduce DicCoder127/DicCoder255 overhead (0 byte vs 1/2 byte per new value)
 
-```
+```js
     ...
 	const encoderDic = new DicCoder255(coder, 'DoubleLE', true);
 	const decoderDic = new DicCoder255(coder, 'DoubleLE', false);
