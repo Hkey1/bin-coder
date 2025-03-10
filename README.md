@@ -131,7 +131,14 @@ Allows you to encode any data. For Length encoding used UIntX(LE/BE)
 ## Dictionaries
 To encode repeating values, you can use dictionaries with 128 and 255 values.
 * To encode a repeate of value, dictionaries require only 1 byte.
-* To encode a new value, DicCoder128/DicCoder255 require an additional 1/2 bytes
+* To encode a new value, DicCoder128 or DicCoder255 require an additional 1 or 2 bytes
+
+|               |        | bytes to encode   | 
+|               | values | new val | repeate | 
+|---------------|--------|---------|---------|  
+| DicCoder127 	| 127    | 1+n     | 1       |
+| DicCoder255 	| 255    | 2+n     | 1 	     |
+
 
 ### DicCoder127
 
@@ -185,7 +192,7 @@ You can set the initial values of the dictionary
 ```
 ### save/load
 You can save/load full state of of the dictionary.
-Its reduce DicCoder127/DicCoder255 overhead (0 byte vs 1/2 byte per new value)
+Its reduce DicCoder127 or DicCoder255 overhead (0 byte vs 1 or 2 bytes per new value)
 
 ```js
 	...
