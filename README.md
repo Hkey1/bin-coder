@@ -135,9 +135,9 @@ To encode repeating values, you can use dictionaries with 128 and 255 values.
 
 |               | new val   | repeate | 
 |---------------|-----------|---------|  
-| no dic 	    | n Bytes   | n Bytes |
-| DicCoder127 	| 1+n Bytes | 1 byte  |
-| DicCoder255 	| 2+n Bytes | 1 byte  |
+| no dic 	    | n bytes   | n bytes |
+| DicCoder127 	| 1+n bytes | 1 byte  |
+| DicCoder255 	| 2+n bytes | 1 byte  |
 
 
 ### DicCoder127
@@ -153,7 +153,7 @@ To encode repeating values, you can use dictionaries with 128 and 255 values.
 	encoderDic.writeNext(5.67)   // 1+8 bytes
 	encoderDic.writeNext(1.234)  // 1   bytes
 	encoderDic.writeNext(5.67)   // 1   bytes
-								 // 20 bytes vs 8*4=32 bytes
+	                             // 20  bytes vs 8*4=32 bytes
 	
 	coder.pos = 0;
 	console.log(decoderDic.readNext()); // 1.234
@@ -172,7 +172,7 @@ To encode repeating values, you can use dictionaries with 128 and 255 values.
 	encoderDic.writeNext(5.67)   // 2+8 bytes
 	encoderDic.writeNext(1.234)  // 1   bytes
 	encoderDic.writeNext(5.67)   // 1   bytes
-								 // 22 bytes vs 8*4=32 bytes
+	                             // 22  bytes vs 8*4=32 bytes
 	...
 ```
 
@@ -187,7 +187,7 @@ You can set the initial values of the dictionary
 	encoderDic.writeNext(5.67)   // 2+8 bytes
 	encoderDic.writeNext(1.234)  // 1   bytes
 	encoderDic.writeNext(5.67)   // 1   bytes
-								 // 13 bytes
+	                             // 13  bytes
 	...
 ```
 ### save/load
@@ -210,7 +210,7 @@ Its reduce DicCoder127 or DicCoder255 overhead (0 byte vs 1 or 2 bytes per new v
 	encoderDic.writeNext(1.234)  //1 bytes
 	encoderDic.writeNext(5.67)   //1 bytes
 	encoderDic.writeNext(8.9)    //1 bytes	
-	//25+5*1 = 30 bytes
+	//                   25+5*1 = 30 bytes
 	
 	decoderDic.loadNext()    
 	decoderDic.readNext() // 1.234
