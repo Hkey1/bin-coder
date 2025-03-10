@@ -42,7 +42,7 @@ There are several options for the constructor:
 The object has a property pos -- the current position for reading and writing. It shifts during reading and writing.
 
 ```js
-	const {SafeCoder} = require('bin-coder');
+	const {SafeCoder} = require('hkey-bin-coder');
 	const coder = new SafeCoder(100)
 	
 	coder.writeNextDoubleLE(1);
