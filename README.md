@@ -133,11 +133,12 @@ To encode repeating values, you can use dictionaries with 128 and 255 values.
 * To encode a repeate of value, dictionaries require only 1 byte.
 * To encode a new value, DicCoder128 or DicCoder255 require an additional 1 or 2 bytes
 
-|               |        | bytes to encode   | 
-|               | values | new val | repeate | 
-|---------------|--------|---------|---------|  
-| DicCoder127 	| 127    | 1+n     | 1       |
-| DicCoder255 	| 255    | 2+n     | 1 	     |
+|               |  values | bytes to encode   | 
+|---------------|---------|-------------------|  
+|               |         | new val | repeate | 
+|---------------|---------|---------|---------|  
+| DicCoder127 	| 127     | 1+n     | 1       |
+| DicCoder255 	| 255     | 2+n     | 1 	     |
 
 
 ### DicCoder127
