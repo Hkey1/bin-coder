@@ -127,3 +127,84 @@ Without loss of accuracy. Works well with decimals. Suports NaN and +Infinity.
 
 ### StringX(LE/BE), BufferX(LE/BE), JsonX(LE/BE) 
 Allows you to encode any data. For Length encoding used UIntX(LE/BE)
+
+## Dictionaries
+To encode repeating values, you can use dictionaries with 128 and 255 values.
+* To encode a repeate of value, dictionaries require only 1 byte.
+* To encode a new value, DicCoder128/DicCoder255 require an additional 1/2 bytes
+
+```
+	const {SafeCoder, DicCoder127, DicCoder255} = require('hkey-bin-coder');
+
+	const coder      = new SafeCoder(1000);
+	const encoderDic = new DicCoder127(coder, 'DoubleLE', true);
+	const decoderDic = new DicCoder127(coder, 'DoubleLE', false);
+	
+	encoderDic.writeNext(1.234); // 1+8 bytes
+	encoderDic.writeNext(5.67)   // 1+8 bytes
+	encoderDic.writeNext(1.234)  // 1   bytes
+	encoderDic.writeNext(5.67)   // 1   bytes
+								 // 20 bytes vs 8*4=32 bytes
+	
+	coder.pos = 0;
+	console.log(decoderDic.readNext()); // 1.234
+	console.log(decoderDic.readNext()); // 5.67
+	console.log(decoderDic.readNext()); // 1.234
+	console.log(decoderDic.readNext()); // 5.67
+```
+
+
+```
+    ...
+	const encoderDic = new DicCoder255(coder, 'DoubleLE', true);
+	const decoderDic = new DicCoder255(coder, 'DoubleLE', false);
+	
+	encoderDic.writeNext(1.234); // 2+8 bytes
+	encoderDic.writeNext(5.67)   // 2+8 bytes
+	encoderDic.writeNext(1.234)  // 1   bytes
+	encoderDic.writeNext(5.67)   // 1   bytes
+								 // 22 bytes vs 8*4=32 bytes
+	...
+```
+
+## initValues
+You can set the initial values of the dictionary
+
+```
+    ...
+	const encoderDic = new DicCoder255(coder, 'DoubleLE', true, [1.234]);
+	
+	encoderDic.writeNext(1.234); // 1   bytes (initValues)
+	encoderDic.writeNext(5.67)   // 2+8 bytes
+	encoderDic.writeNext(1.234)  // 1   bytes
+	encoderDic.writeNext(5.67)   // 1   bytes
+								 // 13 bytes
+	...
+```
+## save/load
+You can save/load full state of of the dictionary.
+Its reduce DicCoder127/DicCoder255 overhead (0 byte vs 1/2 byte per new value)
+
+```
+    ...
+	const encoderDic = new DicCoder255(coder, 'DoubleLE', true);
+	const decoderDic = new DicCoder255(coder, 'DoubleLE', false);
+	
+	encoderDic.encode(1.234);
+	encoderDic.encode(5.67);
+	encoderDic.encode(8.9);
+	
+	encoderDic.saveNext();//1(len) + 3*8(double) = 25
+	
+	encoderDic.writeNext(1.234); //1 bytes  
+	encoderDic.writeNext(5.67)   //1 bytes
+	encoderDic.writeNext(1.234)  //1 bytes
+	encoderDic.writeNext(5.67)   //1 bytes
+	encoderDic.writeNext(8.9)    //1 bytes	
+	//25+5*1 = 30 bytes
+	
+	decoderDic.loadNext()    
+	decoderDic.readNext() // 1.234
+	decoderDic.readNext() // 5.67
+	...
+```
