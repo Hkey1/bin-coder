@@ -1,4 +1,4 @@
-# bin-coder
+# hkey-bin-coder
 Node.js package. Analog of Node.js Buffer.
 
 ## Differences from Node.js Buffer
