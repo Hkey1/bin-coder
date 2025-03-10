@@ -155,7 +155,7 @@ To encode repeating values, you can use dictionaries with 128 and 255 values.
 
 
 ```
-    ...
+	...
 	const encoderDic = new DicCoder255(coder, 'DoubleLE', true);
 	const decoderDic = new DicCoder255(coder, 'DoubleLE', false);
 	
@@ -171,7 +171,7 @@ To encode repeating values, you can use dictionaries with 128 and 255 values.
 You can set the initial values of the dictionary
 
 ```js
-    ...
+	...
 	const encoderDic = new DicCoder255(coder, 'DoubleLE', true, [1.234]);
 	
 	encoderDic.writeNext(1.234); // 1   bytes (initValues)
@@ -186,7 +186,7 @@ You can save/load full state of of the dictionary.
 Its reduce DicCoder127/DicCoder255 overhead (0 byte vs 1/2 byte per new value)
 
 ```js
-    ...
+	...
 	const encoderDic = new DicCoder255(coder, 'DoubleLE', true);
 	const decoderDic = new DicCoder255(coder, 'DoubleLE', false);
 	
