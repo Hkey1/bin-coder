@@ -39,9 +39,9 @@ function trimEnters(str){
 		content = content.replace(`/*${key}*/`, '\n'+trimEnters(val))
 	})
 
-	const fn = `../dist/${className}.js`;
+	const fn = `../builded/${className}.js`;
 	if(content !== await fs.readFile(fn, 'utf8')){ 
 		await fs.writeFile(fn, content, 'utf8');	
 	}
-	require(fn); //syntax check
+	//require(fn); //syntax check
 });

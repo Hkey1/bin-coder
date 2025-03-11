@@ -1,4 +1,4 @@
-const SafeCoder        = require('../dist/SafeCoder.js');
+const SafeCoder        = require('../builded/SafeCoder.js');
 const testReadAndWrite = require('./testReadAndWrite.js');
 
 function random(signed) {

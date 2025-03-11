@@ -1,5 +1,5 @@
 const assert           = require('node:assert');
-const SafeCoder        = require('../dist/SafeCoder.js');
+const SafeCoder        = require('../builded/SafeCoder.js');
 const randomIntFromTo  = require('./randomIntFromTo.js');
 const testReadAndWrite = require('./testReadAndWrite.js');
 

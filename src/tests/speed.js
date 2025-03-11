@@ -1,5 +1,5 @@
-const SafeCoder = require('../dist/SafeCoder.js');
-const FastCoder = require('../dist/FastCoder.js');
+const SafeCoder = require('../builded/SafeCoder.js');
+const FastCoder = require('../builded/FastCoder.js');
 
 const trials = 1e8;
 const bytes  = 100;
