@@ -1,6 +1,6 @@
 {
     "name": "hkey-bin-coder",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "main": "./src/index.js",
     "scripts": {
         "test": "node ./src/tests/index.js"
