@@ -134,7 +134,14 @@ const dataTypes = {
 						values.forEach(val=>encoder.encode(val));
 						encoder.saveNext()
 					}
-					values.forEach(val=>encoder.writeNext(val));
+					values.forEach(val=>{
+						const pos0  = coder.pos;
+						const bytes = encoder.bytes(val)
+						encoder.writeNext(val);
+						if(coder.pos !== pos0+bytes){
+							throw new Error(`coder.pos=${coder.pos} !== pos0+bytes=${pos0}+${bytes}=${pos0+bytes}`);
+						}
+					});
 					//console.log(values.map(val=>encoder.encode(val)));
 
 					coder.pos = 0;

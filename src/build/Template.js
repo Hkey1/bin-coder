@@ -9,7 +9,7 @@ class ClassName extends AbstractCoder {
 };
 
 const proto = ClassName.prototype;
-['readNext', 'writeNext'].forEach(oper=>{
+['readNext', 'writeNext', 'bytes'].forEach(oper=>{
 	['LE', 'BE'].forEach(endian=>{
 		proto[oper+'Float'+endian]  = proto[oper+'Float32'+endian];
 		proto[oper+'Double'+endian] = proto[oper+'Float64'+endian];		

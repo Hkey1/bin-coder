@@ -110,6 +110,60 @@ module.exports = function basic(safe=false){
 					this.pos++;
 				}
 			}
+			bytesUDoubleH(val){${checkVal}
+				if(isNaN(val) || !isFinite(val)) {//to 2 dots: '..'
+					return 2;
+				};
+				if(val===-0) val = +0; 
+				${safe ? "if(val<0) throw new Error('UFloat must be >=0 Given:'+val);": ""}
+				
+				let str = val+'';
+				if(str==='.0'){
+					str ='0.';
+				} else if(str.length===1){
+					str += '.';
+				} else if(str.startsWith('0.') && str.length!==2){
+					str = str.substring(1)
+				}
+					
+				let   cLen = 0
+				const sLen = str.length;
+				for(let i=0; i<sLen; i++){
+					const cur = str[i];
+					if(cur==='0'){
+						if(str[i+1]!=='0'){
+							cLen++ 
+						} else if(str[i+2]!=='0'){
+							cLen++
+							i++;
+						} else {
+							cLen++
+							i+= 2;
+						}
+					} else if(cur==='e'){
+						if(str[i+1]==='-'){
+							cLen++
+						} else if(str[i+1]==='+'){
+							cLen++
+						} else throw new Error('Bad symbol after e "'+str[i+1]+'" in "'+str+'". Expecting - or +');
+						i++;
+					} else if(cur==='.'){
+						if(str[i+1]!=='0'){
+							cLen++
+						} else {
+							cLen++
+							i++;
+						}
+					} else {
+						cLen++
+					}
+				}
+
+				if(cLen < 2 || cLen > 9){
+					return 8;
+				}
+				return Math.ceil((1 + cLen)/2); 
+			}			
 			readNextUDoubleH(){${checks0}
 				const sign  = this.readNextUInt1();
 				if(sign===0){

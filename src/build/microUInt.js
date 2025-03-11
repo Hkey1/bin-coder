@@ -40,7 +40,12 @@ module.exports = function microUInt(safe=false){
 					} else {
 						this.bitPos = end;
 					}
-				}`
+				}
+				bytes${type}(val${fixed ? '' : ', bits'+def1}){ ${checksBits}
+					const end = this.bitPos + ${bits}; 
+					return (end===8) ? 1 : 0;
+				}
+				`
 		);
 	});
 	return {methods: methods.join(''), constants:''};

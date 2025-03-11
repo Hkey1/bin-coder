@@ -18,6 +18,7 @@ module.exports = class DicCoderX extends require('./DicCoder.js'){
 		
 		this._readNextValue  = coder['readNext'+dataType].bind(coder);
 		this._writeNextValue = coder['writeNext'+dataType].bind(coder);
+		this._valueBytes     = coder['bytes'+dataType].bind(coder);
 	}
 	saveNext(){
 		assert(this.isEncoder!==false);

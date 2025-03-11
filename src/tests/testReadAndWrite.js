@@ -14,24 +14,32 @@ module.exports = function testReadAndWrite({trials, coder, type, random, minByte
 	
 	function write(val, pos0){
 		coder.pos    = pos0;
+		coder.bitPos = 0;
+		const eBytes  = (arg1===undefined || arg1ReadOnly) ? coder['bytes'+type](val) : coder['bytes'+type](val, arg1);
+		assert.equal(coder.pos, pos0);
+
 		if(coder.buf['write'+type] && Math.random()>0.8){
+			let pos; 
 			if(arg1===undefined || arg1ReadOnly){
-				coder.buf['write'+type](val, pos0);
+				pos2 = coder.buf['write'+type](val, pos0);
 			} else {
-				coder.buf['write'+type](val, pos0, arg1);
+				pos2 = coder.buf['write'+type](val, pos0, arg1);
 			}
+			assert.equal(eBytes, pos2 - pos0);
 		} else {
-			coder.bitPos = 0;
 			if(arg1===undefined || arg1ReadOnly){
 				coder['writeNext'+type](val);
 			} else {				
 				coder['writeNext'+type](val, arg1);
 			}
 			checkPos(coder, type+' write', pos0, minBytes, maxBytes, bitPos);
+			assert.equal(coder.pos, pos0+eBytes);
 		}
 	}
 	function read(pos0){
 		coder.pos    = pos0;
+		//coder.bitPos = 0;
+
 		if(coder.buf['read'+type] && Math.random()>0.8){
 			return (arg1===undefined
 				? coder.buf['read'+type](pos0)
@@ -44,6 +52,9 @@ module.exports = function testReadAndWrite({trials, coder, type, random, minByte
 				: coder['readNext'+type](arg1)
 			);
 			checkPos(coder, type+' read', pos0, minBytes, maxBytes, bitPos);
+			coder.bitPos = 0;
+			const eBytes = (arg1===undefined || arg1ReadOnly) ? coder['bytes'+type](res) : coder['bytes'+type](res, arg1);
+			assert.equal(coder.pos, pos0+eBytes);
 			return res;
 		}
 	}

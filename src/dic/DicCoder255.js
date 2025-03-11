@@ -4,6 +4,9 @@ module.exports = class DicCoder255 extends require('./DicCoderX.js'){
 	constructor(coder, dataType, isEncoder=undefined, initValues=[]){
 		super(255, coder, dataType, isEncoder, initValues);
 	}
+	bytes(val){
+		return this.get(val) === undefined ? 2 + this._valueBytes(val) : 1;
+	}
 	writeNext(val){
 		assert(this.isEncoder!==false);
 

@@ -80,6 +80,18 @@ class AbstractCoder {
 	writeNextBufferXBE(buf, sourceStart=0, sourceEnd=buf.length){
 		this.writeNextUIntXBE(sourceEnd-sourceStart);
 		return this.writeNextBuffer(buf, sourceStart, sourceEnd);
+	}	
+	bytesBuffer(buf, sourceStart=0, sourceEnd=buf.length){
+		//console.log('bytesBuffer', sourceStart, sourceEnd);
+		return sourceEnd-sourceStart;
+	}
+	bytesBufferXLE(buf, sourceStart=0, sourceEnd=buf.length){
+		const len = sourceEnd-sourceStart; 
+		return this.bytesUIntXLE(len) + len;
+	}
+	bytesBufferXBE(buf, sourceStart=0, sourceEnd=buf.length){
+		const len = sourceEnd-sourceStart; 
+		return this.bytesUIntXBE(len) + len;
 	}
 	
 //String	
@@ -89,6 +101,10 @@ class AbstractCoder {
 	writeNextString(str, encoding='utf8'){		return this.writeNextBuffer(Buffer.from(str, encoding));}
 	writeNextStringXLE(str, encoding='utf8'){	return this.writeNextBufferXLE(Buffer.from(str, encoding));}	
 	writeNextStringXBE(str, encoding='utf8'){	return this.writeNextBufferXBE(Buffer.from(str, encoding));}
+	bytesString(str, encoding='utf8'){		return this.bytesBuffer(Buffer.from(str, encoding));}
+	bytesStringXLE(str, encoding='utf8'){	return this.bytesBufferXLE(Buffer.from(str, encoding));}	
+	bytesStringXBE(str, encoding='utf8'){	return this.bytesBufferXBE(Buffer.from(str, encoding));}
+
 
 //JSON	
 	readNextJson(len, encoding='utf8'){	return JSON.parse(this.readNextString(len, encoding))}
@@ -97,6 +113,10 @@ class AbstractCoder {
 	writeNextJson(data,    encoding='utf8'){return this.writeNextString(JSON.stringify(data), encoding)}
 	writeNextJsonXLE(data, encoding='utf8'){return this.writeNextStringXLE(JSON.stringify(data), encoding)}
 	writeNextJsonXBE(data, encoding='utf8'){return this.writeNextStringXBE(JSON.stringify(data), encoding)}	
+	bytesJson(data,    encoding='utf8'){return this.bytesString(JSON.stringify(data), encoding)}
+	bytesJsonXLE(data, encoding='utf8'){return this.bytesStringXLE(JSON.stringify(data), encoding)}
+	bytesJsonXBE(data, encoding='utf8'){return this.bytesStringXBE(JSON.stringify(data), encoding)}	
+	
 };
 
 module.exports = AbstractCoder;

@@ -80,7 +80,8 @@ module.exports = function basic(safe=false){
 				}
 				writeNext${type}(val){ ${checks0} ${wCheck} 
 					this._typed${type}[this.pos++] = val;
-				}`
+				}
+				bytes${type}() {return 1;}`
 			);
 		} else ['BE','LE'].forEach(endian=>{
 			let get, set;
@@ -102,7 +103,8 @@ module.exports = function basic(safe=false){
 				writeNext${type}${endian}(val${dyn ? ', bytes': ''}){ ${checks0}${toBig}${wCheck}						
 					${set}
 					this.pos  += ${bytes};
-				}`
+				}
+				bytes${type}${endian}(val${dyn ? ', bytes': ''}) {return ${bytes};}`				
 			);
 		})
 	});

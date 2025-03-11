@@ -82,7 +82,29 @@ module.exports = function microUInt(safe=false){
 					this.writeNextBigUInt64${EN}(val);
 					return 9;
 				}
-			}`)
+			}
+			bytesUIntX${EN}(val){${posCheck}
+				${safe ? `if(val<0 || (!Number.isInteger(val) && typeof(val)!=='bigint')) {
+					throw new Error('UIntX: val='+val+' typeof='+typeof(val)+'. Expecting not negative Int');
+				}`: ''}
+				if(val<MaxUIntXB0){
+					return 1;
+				} else if(val<MaxUIntXB1){
+					return 2;
+				} else if(val<MaxUIntXB2){
+					return 3;
+				} else if(val<MaxUIntXB3){
+					return 4;
+				} else if(val<MaxUIntXB4){
+					return 5;
+				} else if(val<MaxUIntXB5){
+					return 6;
+				} else if(val<MaxUIntXB6){
+					return 7;
+				} else {
+					return 9;
+				}
+			}`)			
 	});
 	return {methods: methods.join(''), constants};	
 }
