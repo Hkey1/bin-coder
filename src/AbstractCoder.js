@@ -10,7 +10,7 @@ class AbstractCoder {
 	get length(){return this.buf.length}
 
 	constructor(buf, pos=0){
-		if(this.constructor.name==='AbstractBuffer') throw new Error('AbstractBuffer is Absract Class')
+		if(this.constructor.name==='AbstractBuffer') throw new Error('AbstractBuffer is Abstract Class')
 		if(!(buf instanceof Buffer)){
 			if(Number.isInteger(buf)){
 				buf = Buffer.alloc(buf);
